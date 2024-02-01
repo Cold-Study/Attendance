@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 public class OverviewRepository {
     private final String DB_PATH = "src/main/java/Attendance/db/attendanceDB.dat";
@@ -17,7 +18,8 @@ public class OverviewRepository {
 
         /* 설명. 출석부 DB가 비어있는 경우 더미값을 추가한다. */
         File file = new File(DB_PATH);
-        if (!file.exists()) {ArrayList<Attendance> attendances = new ArrayList<>();
+        if (!file.exists()) {
+            ArrayList<Attendance> attendances = new ArrayList<>();
             attendances.add(new Attendance(1, 1, "홍길동", true,
                     LocalDate.parse("2024-01-02")));
             attendances.add(new Attendance(2, 2, "김영희", false,
@@ -37,7 +39,7 @@ public class OverviewRepository {
         loadAttendances();
 
         System.out.println("============ repository에서 회원정보 다 읽어왔는지 확인 ============");
-        for(Attendance attendance: attendanceList) {
+        for (Attendance attendance : attendanceList) {
             System.out.println(attendance);
         }
     }
@@ -97,5 +99,29 @@ public class OverviewRepository {
 
     public ArrayList<Attendance> allStudentInfo() {
         return attendanceList;
+    }
+
+    public ArrayList<Attendance> attendanceStudent(String date) {
+        ArrayList<Attendance> attendanceArrayList = new ArrayList<>();
+        for (Attendance attendance : attendanceList) {
+            if (attendance.getDate().toString().equals(date) ) {
+                if (attendance.isAttendanceStatus() == true){
+                    attendanceArrayList.add(attendance);
+                }
+            }
+        }
+        return attendanceArrayList;
+    }
+
+    public ArrayList<Attendance> absentStudent(String date) {
+        ArrayList<Attendance> attendanceArrayList = new ArrayList<>();
+        for (Attendance attendance : attendanceList) {
+            if (attendance.getDate().toString().equals(date) ) {
+                if (attendance.isAttendanceStatus() == false){
+                    attendanceArrayList.add(attendance);
+                }
+            }
+        }
+        return attendanceArrayList;
     }
 }

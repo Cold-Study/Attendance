@@ -3,6 +3,7 @@ package Attendance.attendanceView;
 import Attendance.service.AttendanceService;
 import Attendance.service.OverviewService;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class OverviewPage {
@@ -22,11 +23,11 @@ public class OverviewPage {
 
             switch (input) {
                 case 1:
-                    // 설명. 전체 기간 조회
+                    // Memo. 전체 기간 조회 구현 완료
                     totalPeriodPage();
                     break;
                 case 2:
-                    // 설명. 날짜별 조회
+                    // Memo. 날짜 별 조회 이동 구현 완료
                     attendanceDatePage();
                     break;
                 case 9:
@@ -39,7 +40,7 @@ public class OverviewPage {
     }
 
     /* 설명. 날짜별 조회 페이지 */
-    private static void attendanceDatePage() {
+    private static void attendanceDatePage(){
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("\n============== 날짜별 조회 ==============");
@@ -53,9 +54,11 @@ public class OverviewPage {
             switch (input) {
                 case 1:
                     // 설명. 출석 인원 조회 구현 위치
+                    overviewService.attendanceStudent(true);
                     break;
                 case 2:
                     // 설명. 결석 인원 조회 구현 위치
+                    overviewService.attendanceStudent(false);
                     break;
                 case 3:
                     // 설명. 반별 조회 구현 위치
