@@ -72,7 +72,6 @@ public class ManagementRepository {
                     new BufferedInputStream(
                             new FileInputStream("src/main/java/Attendance/db/attendanceDB.dat")));
 
-
             while (true) {
                 Attendance data = (Attendance) ois.readObject();
                 //설명. 데이터 정제하지않고 이건 따로 구분지어두고 전체 맴버 남겨둘 것
@@ -104,26 +103,30 @@ public class ManagementRepository {
         while (st.hasMoreTokens()) {
 
             String x = st.nextToken();
-            System.out.println(x+"찾는중....");
+            
             for (int i = 0; i < Allmembers.size(); i++) {
-                if (Allmembers.get(i).getName().equals(x) && Allmembers.get(i).getDate()==currentDate && Allmembers.get(i).getClassroom() == currentCi) {
-                    System.out.println("found!!!");
+                System.out.println(i);
+                if (Allmembers.get(i).getName().equals(x) && Allmembers.get(i).getDate().equals(currentDate) && Allmembers.get(i).getClassroom().equals(currentCi)){
+
                     Attendance changedAttandance = new Attendance(Allmembers.get(i).getAttendanceNo(),
                             Allmembers.get(i).getMemberNo(), Allmembers.get(i).getName(), false,
                             Allmembers.get(i).getDate(), Allmembers.get(i).getClassroom());
                     Allmembers.remove(i);
                     Allmembers.add(changedAttandance);
+                    break;
                 }
             }
 
             for (int i = 0; i < members.size(); i++) {
-                if (members.get(i).getName().equals(x) && members.get(i).getDate()==currentDate) {
-                    System.out.println("found!!");
+                System.out.println(i);
+                if (members.get(i).getName().equals(x)) {
+
                     Attendance changedAttandance = new Attendance(members.get(i).getAttendanceNo(),
                             members.get(i).getMemberNo(), members.get(i).getName(), false,
                             members.get(i).getDate(), members.get(i).getClassroom());
                     members.remove(i);
                     members.add(changedAttandance);
+                    break;
                 }
             }
         }
