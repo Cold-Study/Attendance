@@ -1,11 +1,11 @@
 package Attendance.repository;
 
 import Attendance.aggregate.Attendance;
+import Attendance.aggregate.Member;
 
 import java.io.*;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class RateRepository {
     private final String DB_PATH = "src/main/java/Attendance/db/attendanceDB.dat";
@@ -45,24 +45,23 @@ public class RateRepository {
     // -----------------------------------------------------------------
 
 
-
-    public double getEachStudentRate(int memberNo, int month) {
-        double rate = getAttendanceRate(memberNo, month);
+    public String getEachStudentRate(int memberNo, int month) {
+        String rate = getAttendanceRate(memberNo, month);
 
         return rate;
     }
 
-    private double getAttendanceRate(int memberNo, int month) {
+    private String getAttendanceRate(int memberNo, int month) {
         int lastDayOfMonth = YearMonth.of(2024, month).lengthOfMonth();
         int count = 0;
 
         for (Attendance attendance : attendanceList) {
-            if (memberNo == attendance.getMemberNo()) {
+            if (memberNo == attendance.getMemberNo() && attendance.isAttendanceStatus()) {
                 count++;
             }
         }
 
-        return (count / (lastDayOfMonth * 10.0)) * 1000.0;
+        return String.format("%.2f", (count / (lastDayOfMonth * 10.0)) * 1000.0);
     }
 
     public String getMemberName(int memberNo) {
@@ -75,7 +74,14 @@ public class RateRepository {
         return null;
     }
 
-    public ArrayList<String> totalAttendanceRate() {
+    public ArrayList<String> totalAttendanceRate(ArrayList<Member> memberList, int month) {
+        ArrayList<String> totalAttendanceRate = new ArrayList<>();
+        for (Member member : memberList) {
+            String result;
+            result = member.getName() + " " + getAttendanceRate(member.getMemberNo(), month);
+            totalAttendanceRate.add(result);
+        }
 
+        return totalAttendanceRate;
     }
 }

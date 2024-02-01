@@ -1,5 +1,6 @@
 package Attendance.attendanceView;
 
+import Attendance.aggregate.Classroom;
 import Attendance.service.RateService;
 
 import java.util.ArrayList;
@@ -66,11 +67,32 @@ public class RatePage {
     }
 
     private static void totalStudentAttendanceRatePage() {
-        ArrayList<String> totalAttendanceRate = rateService.totalAttendanceRate();
+        int month = selectMonth();
+        ArrayList<String> totalAttendanceRate = rateService.totalAttendanceRate(month);
 
+        System.out.println("\n-------------- <<전체 조회 결과>> --------------");
+        for (String result : totalAttendanceRate) {
+            System.out.println(result);
+        }
     }
 
     private static void classStudentAttendanceRatePage() {
-        // 설명. 반별 학생 출석률 조회 구현 예정
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("반을 입력하세요.(A, B, C) : ");
+        String classroom = scanner.nextLine();
+
+        Classroom bt = null;
+        switch (classroom) {
+            case "A":
+                bt = Classroom.A;
+                break;
+            case "B":
+                bt = Classroom.B;
+                break;
+            case "C":
+                bt = Classroom.C;
+                break;
+        }
     }
 }
