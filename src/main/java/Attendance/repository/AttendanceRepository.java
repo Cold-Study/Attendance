@@ -12,12 +12,11 @@ public class AttendanceRepository {
     private final String DB_PATH = "src/main/java/Attendance/db/attendanceDB.dat";
     private static ArrayList<Attendance> attendanceList = new ArrayList<>();
 
-    /* 설명. 프로그램이 켜지자 마자(AttendanceRepository()가 실행되자마자) 파일에 dummy 데이터 추가 및 입력받기 */
     public AttendanceRepository() {
 
-        /* 설명. 출석부 DB가 비어있는 경우 더미값을 추가한다. */
         File file = new File(DB_PATH);
-        if (!file.exists()) {ArrayList<Attendance> attendances = new ArrayList<>();
+        if (!file.exists()) {
+            ArrayList<Attendance> attendances = new ArrayList<>();
             attendances.add(new Attendance(1, 1, "홍길동", true,
                     LocalDate.parse("2024-01-02")));
             attendances.add(new Attendance(2, 2, "김영희", false,
@@ -35,14 +34,9 @@ public class AttendanceRepository {
         }
 
         loadAttendances();
-
-        System.out.println("============ repository에서 회원정보 다 읽어왔는지 확인 ============");
-        for(Attendance attendance: attendanceList) {
-            System.out.println(attendance);
-        }
     }
 
-    /* 설명. 초기 출석 더미값들 파일에 저장하는 메소드 */
+
     private void saveAttendances(ArrayList<Attendance> attendances) {
         ObjectOutputStream oos = null;
 
@@ -51,12 +45,11 @@ public class AttendanceRepository {
                     new BufferedOutputStream(
                             new FileOutputStream(DB_PATH)));
 
-            /* 설명. 넘어온 출석 수만큼 객체 출력하기 */
             for (Attendance attendance : attendances) {
                 oos.writeObject(attendance);
             }
 
-            oos.flush();                // 출력 시에는 flush 해 줄것
+            oos.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -75,7 +68,6 @@ public class AttendanceRepository {
                     new BufferedInputStream(
                             new FileInputStream(DB_PATH)));
 
-            /* 설명. 파일로부터 모든 출석 정보를 읽어 attendanceList에 추가(add) */
             while (true) {
                 attendanceList.add((Attendance) (ois.readObject()));
             }
@@ -142,8 +134,8 @@ public class AttendanceRepository {
     public static ArrayList<Attendance> attendanceStudent(String date) {
         ArrayList<Attendance> attendanceArrayList = new ArrayList<>();
         for (Attendance attendance : attendanceList) {
-            if (attendance.getDate().toString().equals(date) ) {
-                if (attendance.isAttendanceStatus() == true){
+            if (attendance.getDate().toString().equals(date)) {
+                if (attendance.isAttendanceStatus() == true) {
                     attendanceArrayList.add(attendance);
                 }
             }
@@ -154,12 +146,16 @@ public class AttendanceRepository {
     public static ArrayList<Attendance> absentStudent(String date) {
         ArrayList<Attendance> attendanceArrayList = new ArrayList<>();
         for (Attendance attendance : attendanceList) {
-            if (attendance.getDate().toString().equals(date) ) {
-                if (attendance.isAttendanceStatus() == false){
+            if (attendance.getDate().toString().equals(date)) {
+                if (attendance.isAttendanceStatus() == false) {
                     attendanceArrayList.add(attendance);
                 }
             }
         }
         return attendanceArrayList;
+    }
+
+    public ArrayList<Attendance> getAttendanceList() {
+        return attendanceList;
     }
 }

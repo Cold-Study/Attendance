@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-/* 설명. 트랜잭션 성공실패 여부 확인 및 회원 관련 비즈니스 로직 처리하는 클래스 */
 public class AttendanceService {
     private final AttendanceRepository attendanceRepository = new AttendanceRepository();
 
@@ -93,8 +92,30 @@ public class AttendanceService {
     public void classStudentAttendance() {
         Scanner sc = new Scanner(System.in);
         System.out.print("조회하실 반을 입력해주세요: ");
-        String input = sc.nextLine();
-//        input.toUpperCase();
-//        System.out.println(memberService.toGetClass(input));
+        String classroom = sc.nextLine().toUpperCase();
+
+        Classroom bt = null;
+        switch (classroom) {
+            case "A":
+                bt = Classroom.A;
+                break;
+            case "B":
+                bt = Classroom.B;
+                break;
+            case "C":
+                bt = Classroom.C;
+                break;
+        }
+
+        ArrayList<Attendance> attendanceArrayList = attendanceRepository.getAttendanceList();
+        for (Member member: getClassMember(bt)) {
+            for(Attendance attendance: attendanceArrayList){
+                if(member.getMemberNo() == attendance.getMemberNo()){
+                    System.out.println("==== 반 ==== 이름 ==== 날짜 ==== 출석/결석 ====");
+                    System.out.println("     " + member.getClassroom() + "     " + member.getName() + "   " + attendance.getDate() + "   " + attendance.isAttendanceStatus() );
+                }
+            }
+        }
+
     }
 }
