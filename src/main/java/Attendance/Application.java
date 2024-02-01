@@ -3,6 +3,9 @@ package Attendance;
 
 import Attendance.aggregate.Classroom;
 import Attendance.aggregate.Member;
+import Attendance.attendanceView.ManagementPage;
+import Attendance.attendanceView.OverviewPage;
+import Attendance.attendanceView.RatePage;
 import Attendance.service.AttendanceService;
 import Attendance.service.MemberService;
 
@@ -54,15 +57,15 @@ public class Application {
             switch (input) {
                 case 1:
                     // 설명. 출석 관리 페이지
-                    attendanceManagementPage();
+                    ManagementPage.attendanceManagementPage();
                     break;
                 case 2:
                     // 설명. 출석 조회 페이지
-                    attendanceOverviewPage();
+                    OverviewPage.attendanceOverviewPage();
                     break;
                 case 3:
                     // 설명. 출석률 조회 페이지
-                    attendanceRatePage();
+                    RatePage.attendanceRatePage();
                     break;
                 case 9:
                     System.out.println("메인 페이지로 돌아갑니다.");
@@ -71,175 +74,6 @@ public class Application {
                     System.out.println("잘못된 번호입니다. 확인 후 다시 입력해주시길 바랍니다.");
             }
         }
-    }
-
-    /* 설명. 출석률 조회하는 페이지 */
-    private static void attendanceRatePage() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("\n============== 출석률 조회 ==============");
-            System.out.println("1. 학생별 출석률 조회");
-            System.out.println("2. 전체 학생 출석률 조회");
-            System.out.println("3. 반별 학생 출석률 조회");
-            System.out.println("9. 출석 페이지로 돌아가기");
-            System.out.print("메뉴를 선택해주세요 : ");
-            int input = sc.nextInt();
-
-            switch (input) {
-                case 1:
-                    // 설명. 학생별 출석률 조회
-                    eachStudentAttendanceRatePage();
-                    break;
-                case 2:
-                    // 설명. 전체 학생 출석률 조회
-                    totalStudentAttendanceRatePage();
-                    break;
-                case 3:
-                    // 설명. 반별 학생 출석률 조회
-                    lassStudentAttendanceRatePage();
-                    break;
-                case 9:
-                    System.out.println("출석 페이지로 돌아갑니다.");
-                    return;
-                default:
-                    System.out.println("잘못된 번호입니다. 확인 후 다시 입력해주시길 바랍니다.");
-            }
-        }
-    }
-
-    private static void lassStudentAttendanceRatePage() {
-        // 설명. 반별 학생 출석률 조회 구현 예정
-    }
-
-    private static void totalStudentAttendanceRatePage() {
-        // 설명. 전체 학생 출석률 조회 구현 예정
-    }
-
-    private static void eachStudentAttendanceRatePage() {
-        // 설명. 학생별 출석률 조회 구현 예정
-    }
-
-    /* 설명. 출석 조회 페이지 */
-    private static void attendanceOverviewPage() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("\n============== 출석 조회 ==============");
-            System.out.println("1. 전체 기간 조회");
-            System.out.println("2. 날짜별 조회");
-            System.out.println("9. 출석 페이지로 돌아가기");
-            System.out.print("메뉴를 선택해주세요 : ");
-            int input = sc.nextInt();
-
-            switch (input) {
-                case 1:
-                    // 설명. 전체 기간 조회
-                    totalPeriodPage();
-                    break;
-                case 2:
-                    // 설명. 날짜별 조회
-                    attendanceDatePage();
-                    break;
-                case 9:
-                    System.out.println("출석 페이지로 돌아갑니다.");
-                    return;
-                default:
-                    System.out.println("잘못된 번호입니다. 확인 후 다시 입력해주시길 바랍니다.");
-            }
-        }
-    }
-
-    /* 설명. 날짜별 조회 페이지 */
-    private static void attendanceDatePage() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("\n============== 날짜별 조회 ==============");
-            System.out.println("1. 출석 인원 조회");
-            System.out.println("2. 결석 인원 조회");
-            System.out.println("3. 반별 조회");
-            System.out.println("9. 출석 조회 페이지로 돌아가기");
-            System.out.print("메뉴를 선택해주세요 : ");
-            int input = sc.nextInt();
-
-            switch (input) {
-                case 1:
-                    // 설명. 출석 인원 조회 구현 위치
-                    break;
-                case 2:
-                    // 설명. 결석 인원 조회 구현 위치
-                    break;
-                case 3:
-                    // 설명. 반별 조회 구현 위치
-                    break;
-                case 9:
-                    System.out.println("출석 조회 페이지로 돌아갑니다.");
-                    return;
-                default:
-                    System.out.println("잘못된 번호입니다. 확인 후 다시 입력해주시길 바랍니다.");
-            }
-        }
-    }
-
-    private static void totalPeriodPage() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("\n============== 전체 기간 조회 ==============");
-            System.out.println("1. 통합 조회");
-            System.out.println("2. 반별 조회");
-            System.out.println("9. 출석 페이지로 돌아가기");
-            System.out.print("메뉴를 선택해주세요 : ");
-            int input = sc.nextInt();
-
-            switch (input) {
-                case 1:
-                    // 설명. 전체 학생 출석 조회 구현 위치
-                    break;
-                case 2:
-                    // 설명. 반별 학생 출석 조회 구현 위치
-                    break;
-                case 9:
-                    System.out.println("출석 조회 페이지로 돌아갑니다.");
-                    return;
-                default:
-                    System.out.println("잘못된 번호입니다. 확인 후 다시 입력해주시길 바랍니다.");
-            }
-        }
-    }
-
-    /* 설명. 출석 관리 페이지 */
-    private static void attendanceManagementPage() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("\n============== 출결 관리 ==============");
-            System.out.println("1. 출석부 추가");
-            System.out.println("2. 출석부 수정");
-            System.out.println("9. 출석 페이지로 돌아가기");
-            System.out.print("메뉴를 선택해주세요 : ");
-            int input = sc.nextInt();
-
-            switch (input) {
-                case 1:
-                    // 설명. 출석부 추가
-                    addAttendancePage();
-                    break;
-                case 2:
-                    // 설명. 출석부 수정
-                    updateAttendancePage();
-                    break;
-                case 9:
-                    System.out.println("출석 페이지로 돌아갑니다.");
-                    return;
-                default:
-                    System.out.println("잘못된 번호입니다. 확인 후 다시 입력해주시길 바랍니다.");
-            }
-        }
-    }
-
-    private static void updateAttendancePage() {
-        // 설명. 출석부 수정 구현 위치
-    }
-
-    private static void addAttendancePage() {
-        // 설명. 출석부 추가 구현 위치
     }
 
     /* 설명. 회원 관리 페이지 */
