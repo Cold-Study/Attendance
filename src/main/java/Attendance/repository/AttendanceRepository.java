@@ -1,9 +1,12 @@
 package Attendance.repository;
 
 import Attendance.aggregate.Attendance;
+import Attendance.aggregate.Classroom;
+import Attendance.aggregate.Member;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 
 public class AttendanceRepository {
@@ -17,17 +20,17 @@ public class AttendanceRepository {
         File file = new File(DB_PATH);
         if (!file.exists()) {ArrayList<Attendance> attendances = new ArrayList<>();
             attendances.add(new Attendance(1, 1, "홍길동", true,
-                    LocalDate.parse("2024-01-02")));
+                    LocalDate.parse("2024-01-02"), Classroom.A));
             attendances.add(new Attendance(2, 2, "김영희", false,
-                    LocalDate.parse("2024-01-02")));
+                    LocalDate.parse("2024-01-02"), Classroom.A));
             attendances.add(new Attendance(3, 3, "오철수", true,
-                    LocalDate.parse("2024-01-02")));
+                    LocalDate.parse("2024-01-02"), Classroom.B));
             attendances.add(new Attendance(4, 1, "홍길동", true,
-                    LocalDate.parse("2024-01-03")));
+                    LocalDate.parse("2024-01-03"),Classroom.B));
             attendances.add(new Attendance(5, 2, "김영희", false,
-                    LocalDate.parse("2024-01-03")));
+                    LocalDate.parse("2024-01-03"),Classroom.C));
             attendances.add(new Attendance(6, 3, "오철수", false,
-                    LocalDate.parse("2024-01-03")));
+                    LocalDate.parse("2024-01-03"), Classroom.C));
 
             saveAttendances(attendances);
         }
@@ -91,5 +94,45 @@ public class AttendanceRepository {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public String getEachStudentRate(int memberNo, int month) {
+        String rate = getAttendanceRate(memberNo, month);
+
+        return rate;
+    }
+
+    private String getAttendanceRate(int memberNo, int month) {
+        int lastDayOfMonth = YearMonth.of(2024, month).lengthOfMonth();
+        int count = 0;
+
+        for (Attendance attendance : attendanceList) {
+            if (memberNo == attendance.getMemberNo() && attendance.isAttendanceStatus()) {
+                count++;
+            }
+        }
+
+        return String.format("%.2f", (count / (lastDayOfMonth * 10.0)) * 1000.0);
+    }
+
+    public String getMemberName(int memberNo) {
+        for (Attendance attendance : attendanceList) {
+            if (memberNo == attendance.getMemberNo()) {
+                return attendance.getName();
+            }
+        }
+
+        return null;
+    }
+
+    public ArrayList<String> totalAttendanceRate(ArrayList<Member> memberList, int month) {
+        ArrayList<String> totalAttendanceRate = new ArrayList<>();
+        for (Member member : memberList) {
+            String result;
+            result = member.getName() + " " + getAttendanceRate(member.getMemberNo(), month);
+            totalAttendanceRate.add(result);
+        }
+
+        return totalAttendanceRate;
     }
 }

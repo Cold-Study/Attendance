@@ -9,13 +9,14 @@ public class Attendance implements Serializable {
     private String name;        // 멤버 이름
     private boolean attendanceStatus;    // 출석여부(출석:true, 결석:false)
     private LocalDate date;     // 출결 날짜
-
-    public Attendance(int attendanceNo, int memberNo, String name, boolean attendanceStatus, LocalDate date) {
+    private Classroom classroom;
+    public Attendance(int attendanceNo, int memberNo, String name, boolean attendanceStatus, LocalDate date, Classroom classroom) {
         this.attendanceNo = attendanceNo;
         this.memberNo = memberNo;
         this.name = name;
         this.attendanceStatus = attendanceStatus;
         this.date = date;
+        this.classroom = classroom;
     }
 
     public int getAttendanceNo() {
@@ -47,5 +48,9 @@ public class Attendance implements Serializable {
                 ", attendanceStatus=" + attendanceStatus +
                 ", date=" + date +
                 '}';
+    }
+
+    public Classroom getClassroom() {
+        return classroom;
     }
 }

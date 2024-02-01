@@ -36,6 +36,10 @@ public class MemberRepository {
 //        }
     }
 
+    public ArrayList<Member> getMemberList() {
+        return memberList;
+    }
+
     /* 설명. 회원이 담긴 ArrayList를 던지면 파일에 출력하는 기능 */
     private void saveMembers(ArrayList<Member> members) {
         ObjectOutputStream oos = null;
