@@ -15,7 +15,6 @@ public class Member implements Serializable {       // 객체 입출력을 위�
     public Member() {
     }
 
-
     public Member(String id, String pwd, String name, int age) {
         this.id = id;
         this.pwd = pwd;
@@ -38,10 +37,6 @@ public class Member implements Serializable {       // 객체 입출력을 위�
 
     public String getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getPwd() {
