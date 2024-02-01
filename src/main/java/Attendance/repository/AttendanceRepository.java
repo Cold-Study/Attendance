@@ -162,4 +162,9 @@ public class AttendanceRepository {
         }
         return attendanceArrayList;
     }
+
+
+    public ArrayList<Attendance> getAttendanceList() {
+        return attendanceList;
+    }
 }

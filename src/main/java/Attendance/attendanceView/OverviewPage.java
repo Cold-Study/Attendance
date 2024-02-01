@@ -62,6 +62,7 @@ public class OverviewPage {
                     break;
                 case 3:
                     // 설명. 반별 조회 구현 위치
+                    attendanceService.classStudentAttendance();
 
                     break;
                 case 9:
