@@ -1,9 +1,14 @@
 package Attendance.attendanceView;
 
+import Attendance.service.AttendanceService;
+import Attendance.service.OverviewService;
+
 import java.util.Scanner;
 
 public class OverviewPage {
+//    public static AttendanceService attendanceService = new AttendanceService();
 
+    public static OverviewService overviewService = new OverviewService();
     /* 설명. 출석 조회 페이지 */
     public static void attendanceOverviewPage() {
         Scanner sc = new Scanner(System.in);
@@ -77,6 +82,7 @@ public class OverviewPage {
             switch (input) {
                 case 1:
                     // 설명. 전체 학생 출석 조회 구현 위치
+                    overviewService.allStudentInfo();
                     break;
                 case 2:
                     // 설명. 반별 학생 출석 조회 구현 위치
