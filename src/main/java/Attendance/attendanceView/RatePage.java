@@ -79,6 +79,8 @@ public class RatePage {
     private static void classStudentAttendanceRatePage() {
         Scanner scanner = new Scanner(System.in);
 
+        int month = selectMonth();
+
         System.out.print("반을 입력하세요.(A, B, C) : ");
         String classroom = scanner.nextLine();
 
@@ -93,6 +95,13 @@ public class RatePage {
             case "C":
                 bt = Classroom.C;
                 break;
+        }
+
+        ArrayList<String> classAttendanceRate = rateService.classAttendanceRate(bt, month);
+
+        System.out.println("\n-------------- <<반별 조회 결과>> --------------");
+        for (String result : classAttendanceRate) {
+            System.out.println(result);
         }
     }
 }

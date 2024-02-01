@@ -1,6 +1,6 @@
 package Attendance.service;
 
-import Attendance.aggregate.Attendance;
+import Attendance.aggregate.Classroom;
 import Attendance.aggregate.Member;
 import Attendance.repository.MemberRepository;
 import Attendance.repository.RateRepository;
@@ -32,6 +32,24 @@ public class RateService {
         for (String eachResult : attendanceRateList) {
             st = new StringTokenizer(eachResult, " ");
             result.add(st.nextToken() + " : " + st.nextToken() + "%");
+        }
+
+        return result;
+    }
+
+    public ArrayList<String> classAttendanceRate(Classroom bt, int month) {
+        ArrayList<Member> classMemberList = getClassMember(bt);
+        ArrayList<String> attendanceRateList = rateRepository.totalAttendanceRate(classMemberList, month);
+
+        return attendanceRateList;
+    }
+
+    private ArrayList<Member> getClassMember(Classroom bt) {
+        ArrayList<Member> result = new ArrayList<>();
+        for (Member member : memberList) {
+            if (member.getClassroom().equals(bt)) {
+                result.add(member);
+            }
         }
 
         return result;
