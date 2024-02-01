@@ -17,11 +17,10 @@ public class OverviewPage {
 
             switch (input) {
                 case 1:
-                    // 설명. 전체 기간 조회
+
                     totalPeriodPage();
                     break;
                 case 2:
-                    // 설명. 날짜별 조회
                     attendanceDatePage();
                     break;
                 case 9:
@@ -47,13 +46,15 @@ public class OverviewPage {
 
             switch (input) {
                 case 1:
-                    // 설명. 출석 인원 조회 구현 위치
+
+                    attendanceService.attendanceStudent(true);
                     break;
                 case 2:
-                    // 설명. 결석 인원 조회 구현 위치
+                    attendanceService.attendanceStudent(false);
                     break;
                 case 3:
-                    // 설명. 반별 조회 구현 위치
+                    attendanceService.classStudentAttendance();
+
                     break;
                 case 9:
                     System.out.println("출석 조회 페이지로 돌아갑니다.");
@@ -76,10 +77,11 @@ public class OverviewPage {
 
             switch (input) {
                 case 1:
-                    // 설명. 전체 학생 출석 조회 구현 위치
+                    attendanceService.allStudentInfo();
                     break;
                 case 2:
-                    // 설명. 반별 학생 출석 조회 구현 위치
+                    attendanceService.classStudentAttendance();
+
                     break;
                 case 9:
                     System.out.println("출석 조회 페이지로 돌아갑니다.");
