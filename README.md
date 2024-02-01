@@ -3,11 +3,11 @@
 ## 2조
 ### Branch_Name
 - main
-- develop
-- attendance
-  - management
-  - overview
-  - rate
+  - develop
+    - attendance
+      - management
+      - overview
+      - rate
 
 ### 기능 요구사항
 #### 학생
