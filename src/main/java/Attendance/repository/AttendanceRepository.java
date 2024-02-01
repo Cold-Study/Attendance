@@ -1,9 +1,11 @@
 package Attendance.repository;
 
 import Attendance.aggregate.Attendance;
+import Attendance.aggregate.Member;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 
 public class AttendanceRepository {
@@ -91,5 +93,45 @@ public class AttendanceRepository {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public String getEachStudentRate(int memberNo, int month) {
+        String rate = getAttendanceRate(memberNo, month);
+
+        return rate;
+    }
+
+    private String getAttendanceRate(int memberNo, int month) {
+        int lastDayOfMonth = YearMonth.of(2024, month).lengthOfMonth();
+        int count = 0;
+
+        for (Attendance attendance : attendanceList) {
+            if (memberNo == attendance.getMemberNo() && attendance.isAttendanceStatus()) {
+                count++;
+            }
+        }
+
+        return String.format("%.2f", (count / (lastDayOfMonth * 10.0)) * 1000.0);
+    }
+
+    public String getMemberName(int memberNo) {
+        for (Attendance attendance : attendanceList) {
+            if (memberNo == attendance.getMemberNo()) {
+                return attendance.getName();
+            }
+        }
+
+        return null;
+    }
+
+    public ArrayList<String> totalAttendanceRate(ArrayList<Member> memberList, int month) {
+        ArrayList<String> totalAttendanceRate = new ArrayList<>();
+        for (Member member : memberList) {
+            String result;
+            result = member.getName() + " " + getAttendanceRate(member.getMemberNo(), month);
+            totalAttendanceRate.add(result);
+        }
+
+        return totalAttendanceRate;
     }
 }

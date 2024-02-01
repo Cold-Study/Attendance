@@ -1,14 +1,14 @@
 package Attendance.attendanceView;
 
 import Attendance.aggregate.Classroom;
-import Attendance.service.RateService;
+import Attendance.service.AttendanceService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RatePage {
 
-    private static final RateService rateService = new RateService();
+    private static final AttendanceService rateService = new AttendanceService();
 
     /* 설명. 출석률 조회하는 페이지 */
     public static void attendanceRatePage() {
