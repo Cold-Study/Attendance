@@ -1,23 +1,21 @@
 package Attendance.service;
 
-import Attendance.aggregate.Attendance;
 import Attendance.aggregate.Classroom;
 import Attendance.aggregate.Member;
 import Attendance.repository.AttendanceRepository;
 import Attendance.repository.MemberRepository;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class AttendanceService {
     private final AttendanceRepository attendanceRepository = new AttendanceRepository();
 
+
+
     MemberService memberService = new MemberService();
     MemberRepository memberRepository = memberService.getMemberRepository();
     private final ArrayList<Member> memberList = memberRepository.getMemberList();
-
-    ArrayList<Attendance> attendanceList = AttendanceRepository.allStudentInfo();
 
     public AttendanceService() {
     }
@@ -119,3 +117,4 @@ public class AttendanceService {
 
     }
 }
+

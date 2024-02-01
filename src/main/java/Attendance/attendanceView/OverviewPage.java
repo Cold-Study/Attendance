@@ -1,13 +1,8 @@
 package Attendance.attendanceView;
 
-import Attendance.service.AttendanceService;
-
-
-import java.text.ParseException;
 import java.util.Scanner;
 
 public class OverviewPage {
-    public static AttendanceService attendanceService = new AttendanceService();
 
     /* 설명. 출석 조회 페이지 */
     public static void attendanceOverviewPage() {
@@ -22,6 +17,7 @@ public class OverviewPage {
 
             switch (input) {
                 case 1:
+
                     totalPeriodPage();
                     break;
                 case 2:
@@ -50,6 +46,7 @@ public class OverviewPage {
 
             switch (input) {
                 case 1:
+
                     attendanceService.attendanceStudent(true);
                     break;
                 case 2:
@@ -57,6 +54,7 @@ public class OverviewPage {
                     break;
                 case 3:
                     attendanceService.classStudentAttendance();
+
                     break;
                 case 9:
                     System.out.println("출석 조회 페이지로 돌아갑니다.");
@@ -83,6 +81,7 @@ public class OverviewPage {
                     break;
                 case 2:
                     attendanceService.classStudentAttendance();
+
                     break;
                 case 9:
                     System.out.println("출석 조회 페이지로 돌아갑니다.");

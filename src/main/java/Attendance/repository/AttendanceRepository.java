@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class AttendanceRepository {
     private final String DB_PATH = "src/main/java/Attendance/db/attendanceDB.dat";
-    private static ArrayList<Attendance> attendanceList = new ArrayList<>();
+    private ArrayList<Attendance> attendanceList = new ArrayList<>();
 
     public AttendanceRepository() {
 
@@ -126,6 +126,7 @@ public class AttendanceRepository {
 
         return totalAttendanceRate;
     }
+
 
     public static ArrayList<Attendance> allStudentInfo() {
         return attendanceList;
