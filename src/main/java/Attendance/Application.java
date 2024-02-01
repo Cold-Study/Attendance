@@ -9,15 +9,14 @@ import Attendance.attendanceView.RatePage;
 import Attendance.service.AttendanceService;
 import Attendance.service.MemberService;
 
-import java.text.ParseException;
 import java.util.Scanner;
 
 /* 설명. 프로그램 실행 및 메뉴 출력과 사용자의 입력을 받을 View에 해당하는 클래스 */
 public class Application {
     private static final MemberService memberService = new MemberService();
-    private static final AttendanceService attendanceService = new AttendanceService();
+//    private static final AttendanceService attendanceService = new AttendanceService();
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("\n============== 메인 페이지 ==============");
@@ -44,7 +43,7 @@ public class Application {
         }
     }
 
-    private static void attendancePage() throws ParseException {
+    private static void attendancePage() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("\n============== 출석 관리 프로그램 ==============");

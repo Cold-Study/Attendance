@@ -12,6 +12,10 @@ public class MemberService {
     public MemberService() {
     }
 
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
+
     public void selectAllMembers() {
         ArrayList<Member> selectedMembers = memberRepository.selectAllMembers();
 
