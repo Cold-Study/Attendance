@@ -54,15 +54,16 @@ public class OverviewService {
         if (trueFalse == true) {
             attendanceList = attendanceRepository.attendanceStudent(date);
             for(Attendance attendance: attendanceList) {
-                System.out.println("=== 학생 번호 === 학생 이름 === 출/결 ===== 날짜 =====");
-                System.out.println("|     " + attendance.getMemberNo() + "      |   " + attendance.getName() + "    | " + attendance.isAttendanceStatus() + "  | " + attendance.getDate() + " |");
+                System.out.println("=== 학생 번호 === 학생 이름 ====== 날짜 ===== 출/결 =====");
+                System.out.print("|     " + attendance.getMemberNo() + "      |   " + attendance.getName() + "   | " + attendance.getDate() + "  | ");
+                System.out.println("출석" + " |");
             }
         }else {
             attendanceList = attendanceRepository.absentStudent(date);
             for (Attendance attendance : attendanceList) {
-                System.out.println("=== 학생 번호 === 학생 이름 === 출/결 ===== 날짜 =====");
-                System.out.println("|     " + attendance.getMemberNo() + "      |   " + attendance.getName() + "    | " + attendance.isAttendanceStatus() + "  | " + attendance.getDate() + " |");
-            }
+                System.out.println("=== 학생 번호 === 학생 이름 ====== 날짜 ===== 출/결 =====");
+                System.out.print("|     " + attendance.getMemberNo() + "      |   " + attendance.getName() + "   | " + attendance.getDate() + "  | ");
+                System.out.println("결석" + " |");}
         }
     }
 
