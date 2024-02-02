@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class MemberService {
     private final MemberRepository memberRepository = new MemberRepository();
 
-    ArrayList<Member> memberArrayList = memberRepository.selectAllMembers();
     public MemberService() {
     }
 
@@ -53,14 +52,4 @@ public class MemberService {
             System.out.println(member.getId()+"님의 회원 가입이 성공하였습니다.");
         }
     }
-
-//    public ArrayList<Member> toGetClass(String input) {
-//        ArrayList<Member> students = new ArrayList<>();
-//        for (Member member: memberArrayList){
-//            if (input.equals(member.getClassroom())){
-//                students.add(member);
-//            }
-//        }
-//        return students;
-//    }
 }
