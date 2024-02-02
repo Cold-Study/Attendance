@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class OverviewPage {
     public static OverviewService overviewService = new OverviewService();
+
     public static void attendanceOverviewPage() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -48,6 +49,7 @@ public class OverviewPage {
                     break;
                 case 2:
                     overviewService.classStudentAttendance();
+
                     break;
                 case 9:
                     System.out.println("출석 조회 페이지로 돌아갑니다.");
@@ -74,6 +76,7 @@ public class OverviewPage {
                     overviewService.attendanceStudent(true);
                     break;
                 case 2:
+
                     overviewService.attendanceStudent(false);
                     break;
                 case 3:
