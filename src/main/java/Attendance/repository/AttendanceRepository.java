@@ -129,16 +129,7 @@ public class AttendanceRepository {
     }
 
    
-    public ArrayList<String> totalAttendanceRate(ArrayList<Member> memberList, int month) {
-        ArrayList<String> totalAttendanceRate = new ArrayList<>();
-        for (Member member : memberList) {
-            String result;
-            result = member.getName() + " " + getAttendanceRate(member.getMemberNo(), month);
-            totalAttendanceRate.add(result);
-        }
 
-        return totalAttendanceRate;
-    }
     public static ArrayList<Attendance> allStudentInfo() {
         return attendanceList;
     }
