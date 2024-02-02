@@ -10,13 +10,12 @@ import java.util.ArrayList;
 
 public class AttendanceRepository {
     private final String DB_PATH = "src/main/java/Attendance/db/attendanceDB.dat";
-    private ArrayList<Attendance> attendanceList = new ArrayList<>();
+    private static ArrayList<Attendance> attendanceList = new ArrayList<>();
 
     public AttendanceRepository() {
 
         File file = new File(DB_PATH);
-        if (!file.exists()) {
-            ArrayList<Attendance> attendances = new ArrayList<>();
+        if (!file.exists()) {ArrayList<Attendance> attendances = new ArrayList<>();
             attendances.add(new Attendance(1, 1, "홍길동", true,
                     LocalDate.parse("2024-01-02")));
             attendances.add(new Attendance(2, 2, "김영희", false,
@@ -36,6 +35,34 @@ public class AttendanceRepository {
         loadAttendances();
     }
 
+    public String getEachStudentRate(int memberNo, int month) {
+        String rate = getAttendanceRate(memberNo, month);
+
+        return rate;
+    }
+
+
+
+    public String getMemberName(int memberNo) {
+        for (Attendance attendance : attendanceList) {
+            if (memberNo == attendance.getMemberNo()) {
+                return attendance.getName();
+            }
+        }
+
+        return null;
+    }
+
+    public ArrayList<String> totalAttendanceRate(ArrayList<Member> memberList, int month) {
+        ArrayList<String> totalAttendanceRate = new ArrayList<>();
+        for (Member member : memberList) {
+            String result;
+            result = member.getName() + " " + getAttendanceRate(member.getMemberNo(), month);
+            totalAttendanceRate.add(result);
+        }
+
+        return totalAttendanceRate;
+    }
 
     private void saveAttendances(ArrayList<Attendance> attendances) {
         ObjectOutputStream oos = null;
@@ -87,12 +114,6 @@ public class AttendanceRepository {
         }
     }
 
-    public String getEachStudentRate(int memberNo, int month) {
-        String rate = getAttendanceRate(memberNo, month);
-
-        return rate;
-    }
-
     private String getAttendanceRate(int memberNo, int month) {
         int lastDayOfMonth = YearMonth.of(2024, month).lengthOfMonth();
         int count = 0;
@@ -106,28 +127,6 @@ public class AttendanceRepository {
         return String.format("%.2f", (count / (lastDayOfMonth * 10.0)) * 1000.0);
     }
 
-    public String getMemberName(int memberNo) {
-        for (Attendance attendance : attendanceList) {
-            if (memberNo == attendance.getMemberNo()) {
-                return attendance.getName();
-            }
-        }
-
-        return null;
-    }
-
-    public ArrayList<String> totalAttendanceRate(ArrayList<Member> memberList, int month) {
-        ArrayList<String> totalAttendanceRate = new ArrayList<>();
-        for (Member member : memberList) {
-            String result;
-            result = member.getName() + " " + getAttendanceRate(member.getMemberNo(), month);
-            totalAttendanceRate.add(result);
-        }
-
-        return totalAttendanceRate;
-    }
-
-
     public static ArrayList<Attendance> allStudentInfo() {
         return attendanceList;
     }
@@ -135,8 +134,8 @@ public class AttendanceRepository {
     public static ArrayList<Attendance> attendanceStudent(String date) {
         ArrayList<Attendance> attendanceArrayList = new ArrayList<>();
         for (Attendance attendance : attendanceList) {
-            if (attendance.getDate().toString().equals(date)) {
-                if (attendance.isAttendanceStatus() == true) {
+            if (attendance.getDate().toString().equals(date) ) {
+                if (attendance.isAttendanceStatus() == true){
                     attendanceArrayList.add(attendance);
                 }
             }
@@ -147,14 +146,15 @@ public class AttendanceRepository {
     public static ArrayList<Attendance> absentStudent(String date) {
         ArrayList<Attendance> attendanceArrayList = new ArrayList<>();
         for (Attendance attendance : attendanceList) {
-            if (attendance.getDate().toString().equals(date)) {
-                if (attendance.isAttendanceStatus() == false) {
+            if (attendance.getDate().toString().equals(date) ) {
+                if (attendance.isAttendanceStatus() == false){
                     attendanceArrayList.add(attendance);
                 }
             }
         }
         return attendanceArrayList;
     }
+
 
     public ArrayList<Attendance> getAttendanceList() {
         return attendanceList;
